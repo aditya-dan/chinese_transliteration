@@ -7,4 +7,5 @@ dependencies:
   - gensim
   - numpy
   - pandas
-
+  - nltk
+  - spacy
