@@ -6,24 +6,23 @@ The objective of this project is to train an RNN-based encoder-decoder model and
 ## File Structure
 
 ```
-pinyin-ime/
+pinyin-sgns/
 │
 ├── data/
-│   ├── pinyin/  # pinyin corpora
-│   └── hanzi/   # hanzi corpora
+│   ├── pinyin/         # pinyin corpora
+│   └── hanzi/          # hanzi corpora
 │
 ├── src/
 │   ├── bert_model/
 │   ├── sgns_model/
-│   ├── mapping/ 
-│   └── inference/
+│   ├── mapping/        # mapping bert to sgns vectors
+│   └── inference/      # converting the pinyin to hanzi
 │
-├── experiments/
-│   ├── configs/
-│   └── runs/  # checkpoints + logs
-│
+├── scripts/            # data collection scripts 
+├── configs/            # experiment configs
+├── outputs/            # experiment outputs
 ├── README.md
-└── pinyin-sgns.yml
+└── pinyin-sgns.yml     # conda env
 ```
 
 ## Setup Instructions
