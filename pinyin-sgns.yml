@@ -14,6 +14,7 @@ dependencies:
   - gmpy2=2.2.1=py39h5eee18b_0
   - importlib-metadata=8.5.0=py39h06a4308_0
   - jinja2=3.1.6=py39h06a4308_0
+  - jq=1.8.0
   - ld_impl_linux-64=2.44=h153f514_2
   - libabseil=20250127.0=cxx17_h6a678d5_0
   - libffi=3.4.4=h6a678d5_1
