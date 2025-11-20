@@ -7,7 +7,7 @@ from pypinyin import lazy_pinyin
 
 nlp = spacy.load("zh_core_web_sm")
 
-with open("cat.txt", "r") as file:
+with open("test.txt", "r") as file:
     text = file.read()
 
 doc = nlp(text)
@@ -48,8 +48,8 @@ pinyin_stoi = {tok: i for i, tok in enumerate(pinyin_token_list)}
 src_vocab = Vocab(pinyin_stoi)
 tgt_vocab = Vocab(hanzi_stoi)
 
-encoder = Encoder(input_size=len(pinyin_token_list), emb_size=100, hidden_size=100)
-decoder = Decoder(output_size=len(hanzi_token_list), emb_size=100, hidden_size=100)
+encoder = Encoder(input_size=len(pinyin_token_list), emb_size=500, hidden_size=500)
+decoder = Decoder(output_size=len(hanzi_token_list), emb_size=500, hidden_size=500)
 
 model = Seq2Seq(encoder, decoder, device="cpu")
 
@@ -58,7 +58,7 @@ sentence = "yiban yi jiamao conggu daojin dou baocun zhu de weihan tedian，suoy
 translation = translate(
     model,
     sentence,
-    src_tokenizer=lambda s: s.split(),
+    src_tokenizer=lambda s: [token.text for token in nlp(s)],
     src_vocab=src_vocab,
     tgt_vocab=tgt_vocab,
     device="cpu"
