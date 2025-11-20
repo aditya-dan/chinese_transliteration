@@ -5,12 +5,6 @@ from Seq2Seq import Seq2Seq, translate
 from Vocab import Vocab
 from pypinyin import lazy_pinyin
 
-
-encoder = Encoder(input_size=335, emb_size=100, hidden_size=100)
-decoder = Decoder(output_size=311, emb_size=100, hidden_size=100)
-
-model = Seq2Seq(encoder, decoder, device="cpu")
-
 nlp = spacy.load("zh_core_web_sm")
 
 with open("cat.txt", "r") as file:
@@ -48,16 +42,18 @@ special_tokens = ["<pad>", "<sos>", "<eos>", "<unk>"]
 hanzi_token_list = special_tokens + hanzi_token_list
 pinyin_token_list = special_tokens + pinyin_token_list
 
-print(len(pinyin_token_list))
-print(len(hanzi_token_list))
-
 hanzi_stoi = {tok: i for i, tok in enumerate(hanzi_token_list)}
 pinyin_stoi = {tok: i for i, tok in enumerate(pinyin_token_list)}
 
-src_vocab = Vocab(hanzi_stoi)
-tgt_vocab = Vocab(pinyin_stoi)
+src_vocab = Vocab(pinyin_stoi)
+tgt_vocab = Vocab(hanzi_stoi)
 
-sentence = "一般以家貓從古到今都保存著的畏寒特點，所以貓的祖先產於溫暖地帶。"
+encoder = Encoder(input_size=len(pinyin_token_list), emb_size=100, hidden_size=100)
+decoder = Decoder(output_size=len(hanzi_token_list), emb_size=100, hidden_size=100)
+
+model = Seq2Seq(encoder, decoder, device="cpu")
+
+sentence = "yiban yi jiamao conggu daojin dou baocun zhu de weihan tedian，suoyi mao de zuxian chanyu wennuan didai."
 
 translation = translate(
     model,
