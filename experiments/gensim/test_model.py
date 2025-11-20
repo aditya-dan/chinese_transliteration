@@ -24,19 +24,19 @@ for sentence in doc.sents:
 hanzi_model = Word2Vec(
     sentences=hanzi_corpus,  # list of tokenized sentences
     vector_size=50,    # embedding dimension
-    window=3,          # context window
-    min_count=1,       # ignore words with freq < 1
-    sg=1,              # use skip-gram (1) instead of CBOW (0)
-    epochs=100,        # training iterations
+    window=3,          # context window size
+    min_count=1,       # ignore words with frequency below min_count
+    sg=1,              # SGNS is 1, CBOW is 0
+    epochs=100,        # number of epochs
 )
 
 pinyin_model = Word2Vec(
     sentences=pinyin_corpus,  # list of tokenized sentences
     vector_size=50,    # embedding dimension
-    window=3,          # context window
-    min_count=1,       # ignore words with freq < 1
-    sg=1,              # use skip-gram (1) instead of CBOW (0)
-    epochs=100,        # training iterations
+    window=3,          # context window size
+    min_count=1,       # ignore words with frequency below min_count
+    sg=1,              # SGNS is 1, CBOW is 0
+    epochs=100,        # number of epochs
 )
 
 pinyin_model.save("pinyin.model")
