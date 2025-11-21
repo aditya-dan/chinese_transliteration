@@ -1,5 +1,5 @@
 from gensim.models import Word2Vec
-from pypinyin import lazy_pinyin
+from pypinyin import pinyin, Style
 from gensim.matutils import cossim, any2sparse
 
 hanzi_model = Word2Vec.load("hanzi.model")
@@ -11,7 +11,7 @@ over_nine = []
 
 for hanzi_word in hanzi_model.wv.index_to_key:
 
-    pinyin_word = "".join(lazy_pinyin(hanzi_word))
+    pinyin_word = "".join(item[0] for item in pinyin(hanzi_word, style=Style.NORMAL, heteronym=False))
 
     hanzi_vector = hanzi_model.wv[hanzi_word]
     pinyin_vector = pinyin_model.wv[pinyin_word]
