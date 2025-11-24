@@ -2,22 +2,13 @@ import jieba
 from gensim.models import Word2Vec
 from pypinyin import pinyin, Style
 
-with open("cat.txt", "r") as file:
+with open("../texts/cat.txt", "r") as file:
     text = file.read()
 
 words = list(jieba.cut(text))
 
 hanzi_corpus = []
 pinyin_corpus = []
-
-# for sentence in doc.sents:
-#     words = [token.text for token in sentence]
-#     hanzi_corpus.append(words)
-#     pinyin_words = []
-#     for word in words:
-#         pinyin_word = "".join(lazy_pinyin(word))
-#         pinyin_words.append(pinyin_word)
-#     pinyin_corpus.append(pinyin_words)
 
 hanzi_corpus.append(words)
 pinyin_words = []
@@ -47,6 +38,6 @@ pinyin_model = Word2Vec(
     epochs=100,        # number of epochs
 )
 
-pinyin_model.save("pinyin.model")
-hanzi_model.save("hanzi.model")
+pinyin_model.save("../models/pinyin_jieba.model")
+hanzi_model.save("../models/hanzi_jieba.model")
 

@@ -2,8 +2,8 @@ from gensim.models import Word2Vec
 from pypinyin import pinyin, Style
 from gensim.matutils import cossim, any2sparse
 
-hanzi_model = Word2Vec.load("hanzi.model")
-pinyin_model = Word2Vec.load("pinyin.model")
+hanzi_model = Word2Vec.load("../models/hanzi_jieba.model")
+pinyin_model = Word2Vec.load("../models/pinyin_jieba.model")
 
 below_eight = []
 below_nine = []
