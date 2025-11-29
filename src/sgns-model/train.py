@@ -4,6 +4,8 @@ import spacy
 
 nlp = spacy.load("zh_core_web_sm")
 
+nlp.max_length = 40000000
+
 def tokenize(file: str):
     with open(file, "r") as file:
         text = file.read()
@@ -37,6 +39,6 @@ def train_sgns_model(corpus: str, vector_size: int, window: int, min_count: int,
 
     model.save(save_as)
 
-hanzi_corpus, pinyin_corpus = tokenize("cat.txt")
+hanzi_corpus, pinyin_corpus = tokenize("training_data.txt")
 train_sgns_model(hanzi_corpus, 100, 3, 1, 100, "hanzi.model")
 train_sgns_model(pinyin_corpus, 100, 3, 1, 100, "pinyin.model")

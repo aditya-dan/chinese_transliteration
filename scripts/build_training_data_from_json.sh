@@ -1,6 +1,6 @@
 cd ../data || exit
-unzip wiki_zh_2019.zip
-cd wiki_zh || exit
+#unzip wiki_zh_2019.zip
+cd small_wiki_zh || exit
 
 for dir in ./*; do
   for file in ${dir}/*; do
