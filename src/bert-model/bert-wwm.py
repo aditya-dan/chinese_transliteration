@@ -1,3 +1,4 @@
+
 import os
 import re
 import json
@@ -20,6 +21,8 @@ from transformers import (
     TrainingArguments,
     DataCollatorForLanguageModeling,
     PreTrainedTokenizerFast,
+    AutoTokenizer,
+    AutoModelForMaskedLM,
 )
 
 from tokenizers import Tokenizer
@@ -43,36 +46,19 @@ def iter_files(root: Path) -> Iterator[Path]:
             yield p
 
 def iter_json_objects(fp: Path) -> Iterator[dict]:
-    """Supports: single JSON dict, JSON array, or JSON lines."""
-    raw = fp.read_text(encoding="utf-8", errors="ignore").strip()
-    if not raw:
-        return
+    # Stream line-by-line (JSONL). Works for big wiki_* shards.
+    with fp.open("r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line[0] != "{":
+                continue
+            try:
+                obj = json.loads(line)
+                if isinstance(obj, dict):
+                    yield obj
+            except Exception:
+                continue
 
-    # Try full json first
-    try:
-        obj = json.loads(raw)
-        if isinstance(obj, dict):
-            yield obj
-            return
-        if isinstance(obj, list):
-            for it in obj:
-                if isinstance(it, dict):
-                    yield it
-            return
-    except Exception:
-        pass
-
-    # Fallback: JSON lines
-    for line in raw.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            obj = json.loads(line)
-            if isinstance(obj, dict):
-                yield obj
-        except Exception:
-            continue
 
 _HTML_RE = re.compile(r"<[^>]+>")
 _WIKI_TABLE_RE = re.compile(r"^\s*[!|{|}]=*")  # crude: table markup-ish
@@ -96,7 +82,9 @@ def clean_wiki_text(text: str) -> str:
 # -----------------------------
 
 _ASCII_RE = re.compile(r"^[A-Za-z0-9_./:+-]+$")
+from functools import lru_cache
 
+@lru_cache(maxsize=200000)
 def word_to_token(word: str) -> Optional[str]:
     w = word.strip()
     if not w:
@@ -158,6 +146,9 @@ def build_pinyin_corpus_and_vocab(
                 n_written += 1
 
                 n_docs += 1
+                if n_docs % 1000 == 0:
+                  print(f"[Progress] docs={n_docs:,} lines={n_written:,} vocab_seen={len(counter):,}")
+
                 if max_docs is not None and n_docs >= max_docs:
                     break
             if max_docs is not None and n_docs >= max_docs:
