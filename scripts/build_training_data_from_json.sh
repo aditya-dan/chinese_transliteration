@@ -1,5 +1,5 @@
 cd ../data || exit
-#unzip wiki_zh_2019.zip
+unzip wiki_zh_2019.zip
 cd small_wiki_zh || exit
 
 for dir in ./*; do

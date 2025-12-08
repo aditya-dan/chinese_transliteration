@@ -1,2 +1,5 @@
 data
 output
+checkpoints/
+final_model/
+hanzi_sgns.*
