@@ -4,6 +4,10 @@ LING482 project
 
 The objective of this project is to train an RNN-based encoder-decoder model and an SGNS-based encoder-only model to perform a transliteration from Pinyin to Hanzi. The main research question is: can the same accuracy be achieved using an SGNS-based model for a lower computational cost? As of now, we plan to use Gensim for SGNS (that trains on a Hanzi corpus), and Torch for the RNN. We will also fine tune a BERT model trained on a Pinyin corpus to give us embeddings for Pinyin words, and map the embeddings it produces with those from the SGNS.
 
+=====IMPORTANT=====
+
+The results we have as of now are mappings between Hanzi SGNS embeddings and BERT Pinyin embeddings. We have trained SGNS on a Hanzi corpus and BERT on the equivalent Pinyin corpus. The script [mapping_hanzi_and_pinyin_embeddings.py](mlm%2Fmapping_hanzi_and_pinyin_embeddings.py) loads these two models and tests cosine similarities between embeddings. It also checks if the true Hanzi embeddings are within the top 5 nearest neighbours of the predicted embedding, and if there are other Hanzi for a given Pinyin that have closer embeddings than the true Hanzi.
+
 ## File Structure
 
 ```
@@ -14,11 +18,12 @@ pinyin-sgns/
 │   └── hanzi/          # hanzi corpora
 │
 ├── src/
+    ├── mlm/            # SGNS and BERT embeddings are mapped and tested here
 │   ├── bert_model/
 │   ├── sgns_model/
 │   ├── mapping/        # mapping bert to sgns vectors
 │   └── inference/      # converting the pinyin to hanzi
-│
+│   
 ├── scripts/            # data collection scripts
 ├── configs/            # experiment configs
 ├── outputs/            # experiment outputs
