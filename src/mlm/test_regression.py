@@ -9,12 +9,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import joblib
 
+# Loading linear regression model
 reg = joblib.load("pinyin_to_hanzi_regression.joblib")
 W = reg.coef_
 
 nlp = spacy.load("zh_core_web_sm")
 
+# Loading BERT model
 bert_model_path = "pinyin_bert"
+
+# Loading SGNS model
 sgns_model_path = "hanzi_sgns_model/hanzi_sgns.model"
 
 tokenizer = AutoTokenizer.from_pretrained(bert_model_path)
@@ -159,6 +163,7 @@ with open('pinyin_hanzi_dictionary.json', 'r') as file:
 
 cosine_similarities = evaluate_mapping("我是一名学生。我喜欢数学。")
 
+# Plotting cosine similarities
 plt.figure()
 plt.hist(cosine_similarities, bins=10)
 plt.xlabel("Cosine similarity")
