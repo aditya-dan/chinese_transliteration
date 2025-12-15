@@ -17,7 +17,7 @@ model = AutoModelForMaskedLM.from_pretrained(bert_model_path)
 
 sgns_model = Word2Vec.load(sgns_model_path)
 
-with open("hanzi_train_reg.txt.txt", "r") as rf:
+with open("hanzi_train_reg.txt", "r") as rf:
     text = rf.read()
 
 doc = nlp(text)
