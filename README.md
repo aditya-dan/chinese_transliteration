@@ -50,3 +50,39 @@ conda activate pinyin-sgns
 ```
 cd src/mlm
 python test_regression.py
+```
+
+### BERT-WWM Model instructions
+
+### 3. Download and unzip the dataset
+
+
+We use the wiki2019zh dataset:
+
+
+[Download via Google Drive](https://drive.google.com/file/d/1EdHUZIDpgcBoSqbjlfNKJ3b1t0XIUjbt/view?usp=sharing)
+
+
+Create a data/ folder, then unzip the `wiki_zh_2019.zip` file into that directory.
+
+
+### 4. Load and train models
+
+
+Load the model tokenizer and corpus data.
+
+
+```bash
+
+# load the wiki section (We used AA)
+
+python scripts/load.py --wiki_root data/wiki_zh/[YOUR_WIKI_ROOT]/ --out_dir data/output/
+
+
+# train the models
+
+python scripts/train_bert.py --data-dir data/output/ --out_dir src/bert/
+
+python scripts/train_sgns.py --data-dir data/output/ --out_dir src/sgns/
+
+```
