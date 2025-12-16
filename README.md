@@ -67,6 +67,8 @@ cd src/mlm
 python test_regression.py
 ```
 
+NOTE: The commands in configs/test_regression.py MAY NOT WORK! with this approach since those are built for the next approach.
+
 ### BERT-WWM Model instructions (Second Approach, Main Approach in Paper)
 
 ### 3. Download and unzip the dataset
@@ -101,3 +103,4 @@ python scripts/train_reg.py \
 ### 5. Test the models
 
 Commands can be found in configs/test_regression.md.
+Testing for the BERT-WWM + SGNS model should be done in regression/test_regression.md.
