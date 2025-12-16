@@ -74,6 +74,8 @@ python scripts/train_reg.py \
     --max_sentences 25000
 ```
 
+If these steps don't work for you, download the archive.zip file from [Google Drive](https://drive.google.com/file/d/1xnlYVCaFylLqaxTLhF1qBjeyD7hiWQhl/view?usp=drive_link) and move the associated files to their folders.
+
 ### 5. Test the models
 
 Commands can be found in configs/test_regression.md.
