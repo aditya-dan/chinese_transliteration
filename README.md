@@ -46,7 +46,7 @@ conda env create --name pinyin-sgns -f environment.yml
 conda activate pinyin-sgns
 ```
 
-### Navigate to src/mlm and run test_regression.py
+### Navigate to src/mlm, save the models hanzi_sgns_model, pinyin_bert and pinyin_to_hanzi_regression.joblib in the directory, and run test_regression.py
 ```
 cd src/mlm
 python test_regression.py
