@@ -89,8 +89,6 @@ def clean_wiki_text(text: str) -> List[str]:
 # Pinyin tokenization (for BERT)
 # -----------------------------
 
-_ASCII_RE = re.compile(r"^[A-Za-z0-9_./:+-]+$")
-
 from functools import lru_cache
 
 @lru_cache(maxsize=200000)
@@ -101,6 +99,7 @@ def word_to_pinyin_token(word: str) -> Optional[str]:
         return None
 
     # Keep simple ASCII tokens (dates/names/urls)
+    _ASCII_RE = re.compile(r"^[A-Za-z0-9_./:+-]+$")
     if _ASCII_RE.match(w):
         return w.lower()
 

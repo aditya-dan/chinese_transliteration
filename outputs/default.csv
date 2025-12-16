@@ -1,0 +1,8 @@
+pinyin,true_hanzi,true_sim,confused_hanzi,confused_sim
+shi,是,0.961140,,
+shuxue,数学,0.702749,,
+wo,我,0.487194,,
+xuesheng,学生,0.440599,,
+wo,我,0.362117,,
+yiming,一名,0.268637,译名,0.274996
+xihuan,喜欢,0.232386,,

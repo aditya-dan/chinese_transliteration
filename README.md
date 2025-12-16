@@ -23,7 +23,7 @@ pinyin-sgns/
 │   ├── sgns_model/
 │   ├── mapping/        # mapping bert to sgns vectors
 │   └── inference/      # converting the pinyin to hanzi
-│   
+│
 ├── scripts/            # data collection scripts
 ├── configs/            # experiment configs
 ├── outputs/            # experiment outputs
@@ -66,4 +66,17 @@ python scripts/load.py --wiki_root data/wiki_zh/[YOUR_WIKI_ROOT]/ --out_dir data
 # train the models
 python scripts/train_bert.py --data-dir data/output/ --out_dir src/bert/
 python scripts/train_sgns.py --data-dir data/output/ --out_dir src/sgns/
+
+# train regression model
+python scripts/train_reg.py \
+    --data_dir ./data/output/ \
+    --bert_model ./src/bert/final_model/ \
+    --sgns_model ./src/sgns/hanzi_sgns.model \
+    --out_path ./src/regression/pinyin_to_hanzi_regression.joblib
+    --max_sentences 25000
 ```
+
+### 5. Test the models
+
+Test the models.
+Commands can be found in configs/test_regression.md.

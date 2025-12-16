@@ -3,6 +3,5 @@ output
 checkpoints/
 final_model/
 hanzi_sgns.*
-hanzi_sgns_model
 pinyin_bert
-
+.joblib
