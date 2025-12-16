@@ -79,20 +79,11 @@ If these steps don't work for you, download the archive.zip file from [Google Dr
 ### 5. Test the models
 
 Commands can be found in configs/test_regression.md.
-<<<<<<< HEAD
-Testing for the BERT-WWM + SGNS model should be done in regression/test_regression.md.
-
-## BERT-Style MLM (Custom Approach)
-
-# Proceed with caution! This one isn't the one most currently updated - data flow and structures may be different between this and the final version outlined above.
-
 Testing for the BERT-WWM + SGNS model should be done with regression/test_regression.py, NOT the one in mlm.
 
 ## BERT-Style MLM (Custom Approach)
 
-Proceed with caution! This one isn't the one most recently updated - data flow and structures may be different between this and the final version outlined above.
-
-> > > > > > > refs/remotes/origin/main
+Proceed with caution! This one isn't the one most currently updated - data flow and structures may be different between this and the final version outlined above.
 
 #### BERT-Style MLM download link
 
