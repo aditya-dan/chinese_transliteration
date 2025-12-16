@@ -70,7 +70,7 @@ python scripts/train_reg.py \
     --data_dir ./data/output/ \
     --bert_model ./src/bert/final_model/ \
     --sgns_model ./src/sgns/hanzi_sgns.model \
-    --out_path ./src/regression/pinyin_to_hanzi_regression.joblib
+    --out_path ./src/regression/pinyin_to_hanzi_regression.joblib \
     --max_sentences 25000
 ```
 
