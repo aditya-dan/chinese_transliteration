@@ -8,6 +8,8 @@ nlp = spacy.load("zh_core_web_sm")
 
 pinyin_hanzi_dict = {}
 
+
+# use spaCy to tokenize Hanzi text into sentences and words
 def tokenize(file: str):
     with open(file, "r") as file:
         text = file.read()
@@ -22,6 +24,7 @@ def tokenize(file: str):
     return corpus
 
 
+# build and store a dictionary of Pinyin words and all the possible Hanzi they could be mapped to (encountered so far)
 def build_pinyin_hanzi_dictionary(corpus: list):
     for word in set(list(itertools.chain.from_iterable(corpus))):
         pinyin_word = "".join(item[0] for item in pinyin(word, style=Style.NORMAL, heteronym=False))
@@ -34,6 +37,7 @@ def build_pinyin_hanzi_dictionary(corpus: list):
         json.dump(pinyin_hanzi_dict, json_file, indent=4)
 
 
+# train Gensim SGNS
 def train_sgns_model(corpus: list, vector_size: int, window: int, min_count: int, epochs: int, save_as: str):
 
     model = Word2Vec(
@@ -50,4 +54,4 @@ def train_sgns_model(corpus: list, vector_size: int, window: int, min_count: int
 
 hanzi_corpus = tokenize("hanzi.txt")
 build_pinyin_hanzi_dictionary(hanzi_corpus)
-# train_sgns_model(hanzi_corpus, 768, 3, 1, 100, "hanzi_sgns_model/hanzi_sgns.model")
+train_sgns_model(hanzi_corpus, 768, 3, 1, 100, "hanzi_sgns_model/hanzi_sgns.model")
