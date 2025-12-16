@@ -4,4 +4,4 @@ checkpoints/
 final_model/
 hanzi_sgns.*
 pinyin_bert
-.joblib
+*.joblib

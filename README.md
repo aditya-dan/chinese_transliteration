@@ -12,23 +12,24 @@ The results we have as of now are mappings between Hanzi SGNS embeddings and BER
 
 ```
 pinyin-sgns/
-│
 ├── data/
-│   ├── pinyin/         # pinyin corpora
-│   └── hanzi/          # hanzi corpora
-│
+|   ├── output/             # outputs of load.py
+|   ├── wiki_zh/            # where your dataset should go
+|   └── wiki_zh_2019.zip    # download this
+|
 ├── src/
-    ├── mlm/            # SGNS and BERT embeddings are mapped and tested here
-│   ├── bert_model/
-│   ├── sgns_model/
-│   ├── mapping/        # mapping bert to sgns vectors
-│   └── inference/      # converting the pinyin to hanzi
+│   ├── bert/final_model/   # bert model location
+│   ├── sgns/               # sgns model location
+│   ├── regression/         # mapping bert to sgns vectors
+│   └── mlm/                # Attempt of custom BERT is tested here
 │
-├── scripts/            # data collection scripts
-├── configs/            # experiment configs
-├── outputs/            # experiment outputs
+├── scripts/                # data collection + run scripts
+├── configs/                # experiment configs
+├── outputs/                # experiment outputs
+├── experiments/            # tinkering/playing around with models + ideas.
+|                               not important.
 ├── README.md
-└── environment.yml     # conda env
+└── environment.yml         # conda env
 ```
 
 ## Instructions
@@ -46,30 +47,7 @@ conda env create --name pinyin-sgns -f environment.yml
 conda activate pinyin-sgns
 ```
 
-### BERT-Style MLM (first approach)
-
-#### BERT-Style MLM download link
-
-https://drive.google.com/file/d/1cJ86dAbOqB83Egf2pB4K31oPVp79HstV/view?usp=drive_link
-
-#### Hanzi SGNS model download link
-
-https://drive.google.com/file/d/10JSiBrMlqK2p6Hf72s0OoTq0bWsdUFoL/view?usp=drive_link
-
-#### Pinyin to Hanzi Linear Regression model download link
-
-https://drive.google.com/file/d/1cJ86dAbOqB83Egf2pB4K31oPVp79HstV/view?usp=drive_link
-
-Navigate to src/mlm, save the models hanzi_sgns_model, pinyin_bert and pinyin_to_hanzi_regression.joblib in the directory, and run test_regression.py.
-
-```
-cd src/mlm
-python test_regression.py
-```
-
-NOTE: The commands in configs/test_regression.py MAY NOT WORK! with this approach since those are built for the next approach.
-
-### BERT-WWM Model instructions (Second Approach, Main Approach in Paper)
+## BERT-WWM Model instructions (Main Approach)
 
 ### 3. Download and unzip the dataset
 
@@ -104,3 +82,28 @@ python scripts/train_reg.py \
 
 Commands can be found in configs/test_regression.md.
 Testing for the BERT-WWM + SGNS model should be done in regression/test_regression.md.
+
+## BERT-Style MLM (Custom Approach)
+
+Proceed with caution! This one isn't the one most currently updated - data flow and structures may be different between this and the final version outlined above.
+
+#### BERT-Style MLM download link
+
+https://drive.google.com/file/d/1cJ86dAbOqB83Egf2pB4K31oPVp79HstV/view?usp=drive_link
+
+#### Hanzi SGNS model download link
+
+https://drive.google.com/file/d/10JSiBrMlqK2p6Hf72s0OoTq0bWsdUFoL/view?usp=drive_link
+
+#### Pinyin to Hanzi Linear Regression model download link
+
+https://drive.google.com/file/d/1cJ86dAbOqB83Egf2pB4K31oPVp79HstV/view?usp=drive_link
+
+Navigate to src/mlm, save the models hanzi_sgns_model, pinyin_bert and pinyin_to_hanzi_regression.joblib in the directory, and run test_regression.py.
+
+```
+cd src/mlm
+python test_regression.py
+```
+
+NOTE: The commands in configs/test_regression.py MAY NOT WORK! with this approach since those are built for the previous approach.
